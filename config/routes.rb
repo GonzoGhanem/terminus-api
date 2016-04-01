@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'bondis' => 'bondis#list'
-  get 'proximos' => 'bondis#upcoming'
+  get 'bondis/:origin/:destination' => 'bondis#list'
+  get 'proximos/:origin/:destination' => 'bondis#upcoming'
 
 end
