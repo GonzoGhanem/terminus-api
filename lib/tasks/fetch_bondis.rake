@@ -25,13 +25,19 @@ task :fetch_bondis => :environment do
         empresa = row.css("a.detalle_empresa").first.text
         salida = row.css("td.sale").text
         llegada = row.css("td.llega").text
+        dias = []
+        row.css("td.dias").each do |d|
+          dias << get_availability(d.css('.yes-no'))
+        end
+        
         
         Bondi.create(
           name: empresa, 
           departure: Time.parse(salida), 
           arrival: Time.parse(llegada),
           origin: origin,
-          destination: destination
+          destination: destination,
+          days: dias
         )
       end
 
@@ -41,4 +47,8 @@ task :fetch_bondis => :environment do
     end
     
   end
+end
+
+def get_availability(image)
+  image[0][:src] == "http://www.terminalrosario.gob.ar/wp-content/themes/terminal-rosario/images/table-icon-yes.png"
 end
