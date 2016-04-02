@@ -26,8 +26,8 @@ task :fetch_bondis => :environment do
       
       Bondi.create(
         name: empresa, 
-        departure: Bondi.get_correct_date_time(salida), 
-        arrival: Bondi.get_correct_date_time(llegada),
+        departure: Time.parse(salida), 
+        arrival: Time.parse(llegada),
         origin: origin,
         destination: destination
       )
