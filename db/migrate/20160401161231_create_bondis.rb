@@ -2,8 +2,8 @@ class CreateBondis < ActiveRecord::Migration
   def change
     create_table :bondis do |t|
       t.string :name
-      t.time :departure
-      t.time :arrival
+      t.datetime :departure
+      t.datetime :arrival
 
       t.timestamps
     end

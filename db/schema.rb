@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20160401180542) do
 
   create_table "bondis", force: true do |t|
     t.string   "name"
-    t.time     "departure"
-    t.time     "arrival"
+    t.datetime "departure"
+    t.datetime "arrival"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "origin"

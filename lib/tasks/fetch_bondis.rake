@@ -23,10 +23,11 @@ task :fetch_bondis => :environment do
       empresa = row.css("a.detalle_empresa").first.text
       salida = row.css("td.sale").text
       llegada = row.css("td.llega").text
+      
       Bondi.create(
         name: empresa, 
-        departure: Time.parse(salida), 
-        arrival: Time.parse(llegada),
+        departure: Bondi.get_correct_date_time(salida), 
+        arrival: Bondi.get_correct_date_time(llegada),
         origin: origin,
         destination: destination
       )
