@@ -17,20 +17,29 @@ task :fetch_bondis => :environment do
     form.origen = origin
     form.destino = destination
     form.submit
-
+    
     doc = Nokogiri::HTML(agent.page.body)
-    doc.css("table#resultados tbody tr").each do |row|
-      empresa = row.css("a.detalle_empresa").first.text
-      salida = row.css("td.sale").text
-      llegada = row.css("td.llega").text
-      
-      Bondi.create(
-        name: empresa, 
-        departure: Time.parse(salida), 
-        arrival: Time.parse(llegada),
-        origin: origin,
-        destination: destination
-      )
+    loop do
+
+      doc.css("table#resultados tbody tr").each do |row|
+        empresa = row.css("a.detalle_empresa").first.text
+        salida = row.css("td.sale").text
+        llegada = row.css("td.llega").text
+        
+        Bondi.create(
+          name: empresa, 
+          departure: Time.parse(salida), 
+          arrival: Time.parse(llegada),
+          origin: origin,
+          destination: destination
+        )
+      end
+
+      next_page = doc.css("aresultados_next")
+      binding.pry
+      break if next_page.empty?
+      next_page.click
     end
+    
   end
 end
