@@ -1,11 +1,12 @@
 class Destination < ActiveRecord::Base
-  
+
+  ROSARIO_CODE = 2000
+
   def self.possible_paths
-    ##Example output [[[944, 2000], [2000, 944]], [[944, 122], [122, 944]], [[2000, 122], [122, 2000]]]
-    combinations = Destination.all.pluck(:code).combination(2).map do |x|
-      [x, x.reverse]
-    end
-    combinations.reduce :concat
+    self.all
+    .reject { |x| x.code == Destination::ROSARIO_CODE }
+    .map { |y| [ [ROSARIO_CODE, y.code], [y.code, ROSARIO_CODE] ] }
+    .reduce :concat
   end
 
 end

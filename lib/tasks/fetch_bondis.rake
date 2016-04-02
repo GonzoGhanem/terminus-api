@@ -36,7 +36,6 @@ task :fetch_bondis => :environment do
       end
 
       next_page = doc.css("aresultados_next")
-      binding.pry
       break if next_page.empty?
       next_page.click
     end
