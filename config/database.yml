@@ -4,3 +4,12 @@ development:
   database: terminus_development
   pool: 5
   host: localhost
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: terminus
+  username: terminus
+  password: bn326r32nb
+  host: localhost
+  port: 5432
