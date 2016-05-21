@@ -4,13 +4,12 @@ require 'time'
 
 desc "Grabs all the Bondi information from Rosario's terminal website. From Rosario to Venado Tuerto."
 task :fetch_bondis => :environment do
-  Bondi.destroy_all
   path_array = Destination.possible_paths
 
   path_array.each do |path|
     origin = path[0]
     destination = path[1]
-
+    Bondi.where(origin: origin, destination: destination).destroy_all
     agent = Mechanize.new
     agent.get("http://www.terminalrosario.gob.ar/")
     form = agent.page.form_with(:id => "form-buscador")
