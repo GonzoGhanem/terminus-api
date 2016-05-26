@@ -3,11 +3,11 @@ class BondiSerializer < ActiveModel::Serializer
   attributes :name, :departure, :arrival, :today, :days
   
   def departure
-    object.departure.strftime "%H:%M"
+    object.departure.getutc.strftime "%H:%M"
   end
   
   def arrival
-    object.arrival.strftime "%H:%M"
+    object.arrival.getutc.strftime "%H:%M"
   end
   
   def today
