@@ -28,12 +28,11 @@ task :fetch_bondis => :environment do
         row.css("td.dias").each do |d|
           dias << get_availability(d.css('.yes-no'))
         end
-        
-        
+
         Bondi.create(
           name: empresa, 
-          departure: Time.parse(salida), 
-          arrival: Time.parse(llegada),
+          departure: Time.zone.parse(salida),
+          arrival: Time.zone.parse(llegada),
           origin: origin,
           destination: destination,
           days: dias
