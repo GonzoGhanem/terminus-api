@@ -24,6 +24,7 @@ task :fetch_bondis => :environment do
         empresa = row.css("a.detalle_empresa").first.text
         salida = row.css("td.sale").text
         llegada = row.css("td.llega").text
+        url_detalle = row.css("td:last-child").first.css('a').last.attr(:href)
         dias = []
         row.css("td.dias").each do |d|
           dias << get_availability(d.css('.yes-no'))
@@ -35,7 +36,8 @@ task :fetch_bondis => :environment do
           arrival: Time.zone.parse(llegada),
           origin: origin,
           destination: destination,
-          days: dias
+          days: dias,
+          detail_url: url_detalle
         )
       end
 

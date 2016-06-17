@@ -1,6 +1,6 @@
-class BondiSerializer < ActiveModel::Serializer
+class BondiDetailSerializer < ActiveModel::Serializer
 
-  attributes :id, :name, :departure, :arrival, :today, :days
+  attributes :id, :name, :departure, :arrival, :today, :days, :route_details
   
   def departure
     object.departure.strftime "%H:%M"
