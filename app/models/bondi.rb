@@ -22,6 +22,8 @@ class Bondi < ActiveRecord::Base
   private 
 
   def format(the_text)
-    the_text.force_encoding("UTF-8").encode("UTF-8")
+    utf_8_string = the_text.force_encoding('UTF-8').encode('UTF-8')
+    return utf_8_string if utf_8_string.valid_encoding?
+    the_text.force_encoding('ISO8859-1').encode('UTF-8')
   end
 end
