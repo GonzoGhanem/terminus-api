@@ -8,7 +8,7 @@ class Bondi < ActiveRecord::Base
     agent = Mechanize.new
     agent.get(self.detail_url)
     doc = Nokogiri::HTML(agent.page.body)
-    table = doc.css('table')
+    table = doc.css('.popup_recorrido_contenedor > table')
     table.css('tr').map do |row|
       {
         city: format(row.css('.empresa.origen').text),
