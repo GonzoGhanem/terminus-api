@@ -12,7 +12,7 @@ task :fetch_bondis => :environment do
     Bondi.where(origin: origin, destination: destination).destroy_all
     agent = Mechanize.new
     agent.get("http://www.terminalrosario.gob.ar/")
-    form = agent.page.form_with(:id => "form-buscador")
+    form = agent.page.form_with(:id => "formulario_flotante")
     form.origen = origin
     form.destino = destination
     form.submit

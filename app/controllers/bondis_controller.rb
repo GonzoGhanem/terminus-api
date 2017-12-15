@@ -8,8 +8,11 @@ class BondisController < ApplicationController
   end
   
   def upcoming
-    bondis = Bondi.from_to(@origin, @destination).next_three_from_now
-    render json: bondis
+    bondis = Bondi.from_to(@origin, @destination) #.next_three_from_now
+    upcoming_bondis = bondis.select do |b|
+      Time.parse(b.departure.strftime("%H:%M")) > Time.now
+    end.first(3)
+    render json: upcoming_bondis
   end
 
   def details
